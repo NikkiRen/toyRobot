@@ -1,17 +1,18 @@
 '#use strict'
 
 
-const newGame = (size) =>{
+const newGame = (rows,cols) =>{
   //creates a 2d grid full of 0s
 
-  let grid = new Array (size)
+  let grid = new Array (cols)
+  console.log(grid)
 
-  for (let i=0; i<size; i++){
-    grid[i] = new Array(5)
+  for (let i=0; i<cols; i++){
+    grid[i] = new Array(rows)
   }
 
-  for(let i = 0; i < size; i++) {
-    for(let j = 0; j < size; j++) {
+  for(let i = 0; i < cols; i++) {
+    for(let j = 0; j < rows; j++) {
       grid[i][j] = 0
     }
   }
@@ -20,12 +21,21 @@ const newGame = (size) =>{
 
 }
 
+const map = (grid,x,y) =>{
+
+}
+
 
 const placeRobot = (grid, x, y, o) =>{
+  const rows = grid.length
+  const cols = grid[0].length
+  console.log(`rows ${rows}`)
+  console.log(`cols ${cols}`)
 
-  grid [y][x] = o
+  grid[y-rows][x-rows] = o
+  //grid [y][x] = o
   //takes in the location of the bot and marks it with the orientation
-  return grid;
+  return grid
 }
 
 
@@ -34,11 +44,13 @@ const moveRobot = (grid) => {
   const location = findRobot(grid)
   let x = location[0]
   let y = location[1]
-  if (canMove(grid)==false){
+  console.log(canMove(grid))
+  if (canMove(grid)===false){
     console.log('If I Move I\'ll fall off the table\!')
   }
   else {
     let orientation = grid[x][y]
+
       if(orientation === 1){
         grid[x][y-1] = orientation
       }
@@ -63,7 +75,7 @@ const changeOrientation = (grid, o) => {
   grid[location[0]][location[1]] = o
   //this is replacing my entire array here with just the number
   return grid
-  //takes in the grid and changes the orientation
+  //takes in the grid and changes the orientation of the bot
 }
 
 const findRobot = (grid) => {
@@ -82,10 +94,10 @@ const findRobot = (grid) => {
 
 const canMove = (grid) => {
   //checks the location of the bot and returns a boolean determining if the bot can move based on its current orientation
-  let location = findRobot(grid)
-  let x = location[1]
-  let y = location[0]
-  let orientation = grid[x][y]
+  const location = findRobot(grid)
+  const x = location[1]
+  const y = location[0]
+  const orientation = grid[x][y]
   let canMove = true
 
   if (orientation === 1 && y === 0){
@@ -93,23 +105,30 @@ const canMove = (grid) => {
 
   }
 
-  if (orientation === 2 && x === 4){
+  if (orientation === 2 && x === grid.length){
     canMove = false
   }
 
-  if (orientation === 3 && y === 4){
+  if (orientation === 3 && y === grid.length){
     canMove = false
   }
 
-  if (orientation ===4 && x === 0){
+  if (orientation === 4 && x === 0){
     canMove = false
   }
 
   return canMove
 }
 
-let grid = newGame(5)
-grid = placeRobot(grid, 1,2,1)
+const resolveIndex = (grid) => {
+
+
+
+}
+
+let grid = newGame(5,6)
+console.log(grid)
+grid = placeRobot(grid, 0,0,1)
 grid = changeOrientation(grid, 2)
 console.log(`heres my grid before moving`)
 console.log(grid)
