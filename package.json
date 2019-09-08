@@ -1,0 +1,18 @@
+{
+  "name": "toyrobot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "author": "nikki renvoize",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^3.0.1"
+  }
+}
