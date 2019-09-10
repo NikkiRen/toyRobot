@@ -136,8 +136,31 @@ grid = moveRobot(grid)
 
 console.log(`I moved, heres my grid`)
 console.log(grid)
-const playGame = (size)=>{
-  let grid = newGame(size)
+//takes in the grid and recursively calls the function till it is passed "done", in the cli the grid will be built first
+const playGame = (grid, cmd)=>{
+  cmd = cmd.toLowerCase()
+  if (cmd === "place"){
+    //ask for arguments
+    let x =  process.argv(2)
+    let y =  process.argv(3)
+    let o =  process.argv(4)
+    //call place
+    grid = placeRobot(grid,x,y,o)
+    //ask for arguments
+    //call playGame
+    playGame(grid, cmd)
+  }
+  if (cmd === "move"){
+
+  }
+  if (cmd === "orientation"){
+
+  }
+  if(cmd === "done"){
+    console.log(`Thanks for playing!`)
+    return;
+  }
+
 
 }
 
