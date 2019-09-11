@@ -1,0 +1,4 @@
+{
+  "Instructions": = ["place", "move", "orient", "done"],
+  "Orientation": = ["north", "east", "south", "west"]
+}

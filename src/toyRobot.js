@@ -1,5 +1,7 @@
 '#use strict'
 
+const readline = require('readline');
+const CONSTANTS = require('./constants.json')
 
 const newGame = (rows,cols) =>{
   //creates a 2d grid full of 0s
@@ -136,6 +138,36 @@ grid = moveRobot(grid)
 
 console.log(`I moved, heres my grid`)
 console.log(grid)
+
+//a function to call for the next cmd line arguments
+
+const askForInstruction = () =>{
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  rl.question('What would you like to do?', (arg) => {
+    let arg = arg.toLowerCase()
+    //if the cmd is allowable close the readstream else ask for a new instruction
+    for cmd in CONSTANTS.instructions{
+      if (arg === cmd){
+        return;
+      }
+      else
+    }
+
+
+
+    }
+
+    rl.close();
+  });
+
+}
+
+
+
 //takes in the grid and recursively calls the function till it is passed "done", in the cli the grid will be built first
 const playGame = (grid, cmd)=>{
   cmd = cmd.toLowerCase()
