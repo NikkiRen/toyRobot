@@ -1,4 +1,5 @@
 const readline = require('readline');
+const CONSTANTS = require('./constants.js')
 //const CONSTANTS = require('./constants.json')
 
 // const rl = readline.createInterface({
@@ -22,10 +23,10 @@ const askForInstruction = async () =>{
 
   rl.question('What would you like to do? ', (arg) => {
     arg = arg.toLowerCase()
-    console.log(typeof arg)
+    let instructions = CONSTANTS.INSTRUCTIONS
     //if the cmd is allowable close the readstream else ask for a new instruction
     for (cmd in instructions){
-      if (arg==="move"){
+      if (arg===cmd){
         console.log(`matching argument is ${arg}`)
         rl.close()
         return arg;
@@ -41,5 +42,12 @@ const askForInstruction = async () =>{
 }
 
 //will need to worry about it being async
- console.log(askForInstruction())
- console.log("order")
+
+const callasync = async () =>{
+  console.log("start")
+  let arg = await askForInstruction()
+ 
+  console.log(arg)
+}
+  
+callasync()
