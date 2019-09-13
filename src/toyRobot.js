@@ -1,7 +1,7 @@
 '#use strict'
 
 const readline = require('readline');
-const CONSTANTS = require('./constants.json')
+const CONSTANTS = require('./constants.js')
 
 const newGame = (rows,cols) =>{
   //creates a 2d grid full of 0s
@@ -128,48 +128,30 @@ const resolveIndex = (grid) => {
 
 }
 
-let grid = newGame(5,6)
-console.log(grid)
-grid = placeRobot(grid, 0,0,1)
-grid = changeOrientation(grid, 2)
-console.log(`heres my grid before moving`)
-console.log(grid)
-grid = moveRobot(grid)
+// let grid = newGame(5,6)
+// console.log(grid)
+// grid = placeRobot(grid, 0,0,1)
+// grid = changeOrientation(grid, 2)
+// console.log(`heres my grid before moving`)
+// console.log(grid)
+// grid = moveRobot(grid)
 
-console.log(`I moved, heres my grid`)
-console.log(grid)
+// console.log(`I moved, heres my grid`)
+// console.log(grid)
 
-//a function to call for the next cmd line arguments
+//Function will return the arugments 
 
 const askForInstruction = () =>{
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
-  rl.question('What would you like to do?', (arg) => {
-    let arg = arg.toLowerCase()
-    //if the cmd is allowable close the readstream else ask for a new instruction
-    for cmd in CONSTANTS.instructions{
-      if (arg === cmd){
-        return;
-      }
-      else
-    }
-
-
-
-    }
-
-    rl.close();
-  });
 
 }
 
 
 
 //takes in the grid and recursively calls the function till it is passed "done", in the cli the grid will be built first
-const playGame = (grid, cmd)=>{
+const playGame = (grid)=>{
+  //ask for instruction will only return a valid instruction 
+  let cmd = askForInstruction()
+  
   cmd = cmd.toLowerCase()
   if (cmd === "place"){
     //ask for arguments
@@ -197,5 +179,13 @@ const playGame = (grid, cmd)=>{
 }
 
 
-
-//so you have one grid per robot, you must initiate a new game
+module.exports ={
+  newGame,
+  placeRobot,
+  moveRobot,
+  askForInstruction,
+  changeOrientation,
+  findRobot,
+  resolveIndex,
+  playGame
+}
