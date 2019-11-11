@@ -28,14 +28,18 @@ const askForInstruction = async () =>{
     //if the argument is not allowable ask for a new one
       if (!instructions.includes(arg)){
         reject(console.log(`oops! ${arg} is not valid input, please say place, move, orient or done`))
+        .catch((err)=>{
+          console.log(err)
+        })
+        askForInstruction()
       }
       else{
         resolve(arg)
       }
     rl.close();
-  
+
   })
-    
+
   });
 
 }
@@ -45,16 +49,13 @@ const askForInstruction = async () =>{
 // const callasync = async () =>{
 //   console.log("start")
 //   let arg = await askForInstruction()
- 
+
 //   console.log(arg)
 // }
-const callAsync = () =>{
-  return new Promise((resolve,reject)=>{
-    return askForInstruction().then(ins =>{
-      console.log("when")
-    resolve(console.log(ins))
-    })
+const callAsync = async () =>{
+  let ins = await askForInstruction()
+  console.log(ins)
+    }
 
-  })
-}
+
 callAsync()
